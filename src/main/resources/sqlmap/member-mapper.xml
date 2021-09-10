@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member.mapper">
+   
+   <!--웹 아이디 중복검사  -->
+   <select id="id_check" resultType="integer">
+      select count(*) from c_member
+      where email=#{email}
+   </select>
+   
+   <!-- 웹 로그인 -->
+   <select id="weblogin" resultType="com.todays.cafe.domain.member.MemberVO" >
+       select * from c_member where email=#{email} and userpwd=#{userpwd} 
+   </select>
+
+   <!-- 안드로이드 & 웹 회원가입 -->
+   <insert id="insert">
+      insert into c_member(email,userid, userpwd, dbimgpath, fileName )
+      values(#{email},#{userid}, #{userpwd}, #{dbimgpath,jdbcType=VARCHAR}, #{fileName, jdbcType=VARCHAR})
+   </insert>
+   
+   
+   <!--  안드로이드 & 웹 회원 탈퇴 -->   
+   <delete id="userdelete">
+      delete from c_member where email=#{email}
+   </delete>
+   
+   <!--안드로이드  -->
+   <update id="memberUpDate" >
+      update c_member set userpwd = #{userpwd}, dbimgpath = #{dbimgpath,jdbcType=VARCHAR}, fileName=#{fileName, jdbcType=VARCHAR}, userid=#{userid}
+      where email=#{email}
+   </update>
+   
+
+   <select id="applogin" resultType="com.todays.cafe.domain.member.MemberVO">
+      select * from c_member where email=#{email} and userpwd=#{userpwd}
+   </select>
+
+   <select id="apploginck" resultType="integer">
+      select * from c_member where email=#{email} and userpwd=#{userpwd}
+   </select>
+   
+   <select id="webnaverlogin" resultType="com.todays.cafe.domain.member.MemberVO">
+		select replace(dbimgpath, '\', '/') dbimgpath, m.* from c_member m where email=#{email}
+	</select>
+	
+	<select id="androidResponse" resultType="com.todays.cafe.domain.member.MemberVO">
+		select * from c_member where email=#{email}
+	</select>
+   
+   <select id="emailmatching" resultType="com.todays.cafe.domain.member.MemberVO">
+		select * from c_member where email=#{email}
+	</select> 
+	
+	<select id="androidtype" resultType="com.todays.cafe.domain.member.MemberVO">
+		select * from c_member where userid=#{userid,jdbcType=VARCHAR} and userpwd=#{userpwd,jdbcType=VARCHAR} and fileName=#{fileName,jdbcType=VARCHAR}
+	</select>
+   
+   <select id="webResponse" resultType="com.todays.cafe.domain.member.MemberVO">
+		select * from c_member where email=#{email}
+	</select>
+   
+   	<select id="emaildbmatching" resultType="com.todays.cafe.domain.member.MemberVO">
+		select * from c_member where email=#{email}
+	</select> 
+   
+   <!--  메일인증시 상태값을 1로 변경-->
+   <update id="updateAuthstatus">
+      update c_member set authstatus= #{authstatus} where email=#{email}
+   </update>
+   
+   <update id="updateAuthkey">
+      update c_member set authkey= #{authkey} where email=#{email}
+   </update>
+   
+   	<insert id="insertNaver" >
+		insert into c_member(email,userid,authstatus, admin, dbimgpath)
+		values (#{email}, #{userid}, #{authstatus}, #{admin}, #{dbimgpath, jdbcType=VARCHAR})
+	</insert>
+   
+   <insert id="insertNaverweb" >
+		<!-- select * from member where email=#{email} -->
+		insert into c_member(email, userid, authstatus, admin, dbimgpath)
+		values (#{email},#{userid}, #{authstatus}, #{admin},#{dbimgpath, jdbcType=VARCHAR})
+	</insert>
+
+</mapper>

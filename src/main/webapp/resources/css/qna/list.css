@@ -1,0 +1,7 @@
+table,h1,div,#list-top{
+	width: 60%;
+	margin: 0 auto;
+}
+a:hover {
+	cursor: pointer;
+}

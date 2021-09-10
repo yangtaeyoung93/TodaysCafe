@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage.mapper">
+	
+
+	<select id="list" resultType="mypage.BookmarkVO">
+		select u.filepath,bo.storename,bo.no, bo.address, bo.tel ,bo.email from c_upload u inner join c_bookmark bo using(id) where bo.email=#{email}
+	</select>
+
+
+	<select id="detail" resultType="mypage.MypageVO">
+		select * from c_member where
+		email = #{email}
+	</select>
+
+	<update id="update">
+		update c_member set userpwd=#{userpwd},authstatus=#{authstatus},
+		filename=#{filename, jdbcType=VARCHAR}, dbimgpath=#{dbimgpath,jdbcType=VARCHAR}
+		where email=#{email}
+	</update>
+
+	<delete id="delete">
+		delete from c_member where email=#{email}
+	</delete>
+	
+	<select id="selectMember" resultType="com.todays.cafe.domain.member.MemberVO">
+		select * from c_member where
+		email = #{email}
+	</select>
+
+</mapper>

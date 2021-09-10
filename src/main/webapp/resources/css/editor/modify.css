@@ -1,0 +1,44 @@
+/*modify*/
+::placeholder {
+  font-size: 20px;
+  font-weight: 400;
+  opacity: 1;
+}
+input{
+        border-style:none;
+        border-bottom:solid 1px #cacaca;
+        border-collapse:collapse;
+}
+table,h1,div{
+   width: 60%;
+   margin: 0 auto;
+}
+
+.file-img {
+   width: 18px;
+   height: 18px;
+   cursor: pointer;
+}
+
+#attach-file, #delete-file {
+   display: none;
+}
+
+img {
+   vertical-align: middle;
+}
+#file-upload{
+width:100%;
+height:70px;
+display:inline;
+}
+#underline {
+text-decoration: underline;
+text-underline-position: under;
+float: left;
+display:inline;
+width: 15%;
+}
+
+a:hover{cursor: pointer;}
+/*end*/

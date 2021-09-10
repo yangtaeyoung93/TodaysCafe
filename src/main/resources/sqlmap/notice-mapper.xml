@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice.mapper">
+
+<!-- 이게 진짜임 -->
+<insert id="insert">
+		insert into c_notice (id,title, content, filename,filepath)
+		values(seq_c_notice.nextval,#{title},#{content},
+		#{filename,jdbcType=VARCHAR},#{filepath,jdbcType=VARCHAR}) 
+</insert>
+	<sql id="search">
+		<if test="search=='title' or search=='content'"> <!-- writer 따로 빼줌 -->
+			where ${search} like '%'||#{keyword}||'%'
+		</if>	
+		<if test="search=='all'">
+			where title like '%'||#{keyword}||'%'
+			or content like '%'||#{keyword}||'%'  
+		</if>
+	</sql>
+<select id="list" resultType="notice.NoticeVO">
+		select n.* 
+		from (select rownum no, n.* from (select * from c_notice <include refid="search"/>) n
+													order by no desc) n 
+		where no between #{beginList} and  #{endList}						
+</select>
+<select id="total" resultType="integer">
+		select count(*) 
+		from c_notice <include refid="search"/>
+</select>
+<select id="detail" resultType="notice.NoticeVO">
+		select * from
+ 		(select id,title,content, filename, filepath, lead(title,1,'') over(order by id) nexttitle, 
+ 		lead(id,1,'') over(order by id) next_idx,
+ 		lag(title,1,'') over(order by id) pretitle,
+ 		lag(id,1,'') over(order by id) pre_idx
+ 		from c_notice)
+		where id=#{id}
+</select>
+<update id="read">
+		update c_notice 
+		set readcnt=readcnt+1 
+		where id=#{id}
+</update>
+<update id="update">
+		update c_notice 
+		set title=#{title},content=#{content},filename=#{filename,jdbcType=VARCHAR},filepath=#{filepath,jdbcType=VARCHAR}
+		where id=#{id}
+</update>
+<delete id="delete">
+		delete from c_notice 
+		where id=#{id}
+</delete>
+<select id="nolist" resultType="notice.NoticeVO">
+		select rownum no, n.*
+		from (select * from c_notice order by id) n
+		order by no desc 
+</select>
+</mapper>

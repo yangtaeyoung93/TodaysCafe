@@ -1,0 +1,16 @@
+/*modify*/
+#radius-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 150px; /* 레이어 반크기만큼 반경을 잡기*/
+    display: table-cell;
+    vertical-align: middle;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+#usermodify, #cancel, #delete-file{
+	cursor: pointer;
+}
+/*end*/

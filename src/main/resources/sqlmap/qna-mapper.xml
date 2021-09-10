@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna.mapper">
+   <sql id="search">
+      <if test="search=='title' or search=='content'"> 
+         where ${search} like '%'||#{keyword}||'%'
+      </if>   
+      <if test="search=='all'">
+         where title like '%'||#{keyword}||'%'
+         or content like '%'||#{keyword}||'%'  
+      </if>
+   </sql>
+   
+   
+   <!-- writer 추가하면 쿼리문 추가하기 -->
+<select id="list" resultType="qna.QnaVO"> 
+      select n.* , (select userid from c_member where userid= writer) writer
+      from (select rownum no, n.* from (select * from c_qna <include refid="search"/> order by root,step desc) n
+                                       order by no desc) n 
+      where no between #{beginList} and  #{endList} 
+</select>
+
+
+<select id="total" resultType="integer">
+      select count(*) 
+      from c_qna <include refid="search"/>
+</select>
+   
+<insert id="insert">
+      insert into c_qna (id,root,title, content,writer, filename,filepath)
+      values(seq_c_qna.nextval,seq_c_qna.currval,#{title},#{content}, #{writer},#{filename,jdbcType=VARCHAR},#{filepath,jdbcType=VARCHAR}) 
+</insert>
+
+<select id="detail" resultType="qna.QnaVO">
+      select * 
+      from c_qna 
+      where id=#{id}
+</select>
+
+<update id="read">
+      update c_qna 
+      set readcnt=readcnt+1 
+      where id=#{id}
+</update>
+
+<delete id="delete">
+      delete from c_qna 
+      where id=#{id} 
+</delete>
+
+<update id="update">
+      update c_qna 
+      set title=#{title},content=#{content},filename=#{filename,jdbcType=VARCHAR},filepath=#{filepath,jdbcType=VARCHAR}
+      where id=#{id}
+   </update>
+   
+<insert id="reply_insert">
+       {call declare begin
+          update c_qna set step=step+1 where root = #{root} and step <![CDATA[ > ]]> #{step};   
+         insert into c_qna(id, root, title, content, writer, filename, filepath, step, indent)
+            values(seq_c_qna.nextval,#{root},#{title},#{content}, #{writer},
+               #{filename,jdbcType=VARCHAR},#{filepath,jdbcType=VARCHAR},#{step}+1,#{indent}+1);
+               end}
+</insert>   
+</mapper>

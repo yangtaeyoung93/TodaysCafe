@@ -1,0 +1,60 @@
+/*mypage*/
+*{
+  	margin-left:10%;
+  	margin-right:10%;
+  	box-sizing: border-box;
+}
+
+body {
+   background-color: #D8C7C8;
+
+}
+
+#radius-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 150px; /* 레이어 반크기만큼 반경을 잡기*/
+    display: table-cell;
+    vertical-align: middle;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+#bookmark{
+	width: 400px;
+    height: 300px;
+    margin:6px auto;
+    background-size: cover;   /* 이미지 가운데로  */
+    position:relative;
+}
+
+.cafeaddress, .cafename {text-align:center; font-size:20px; font-family:'Nanum Gothic';}
+.imgoverlay {}
+
+
+#gouserdetail , .imgoverlay{
+cursor: pointer;
+}
+
+img:hover {
+    opacity: 0.5;
+}
+.row a {
+    display: inline-block;
+    text-align: center;
+    margin:5px;
+    color:white;
+}
+
+.cafeaddress, .cafename{
+position: relative;
+left:15.3px ;
+bottom:92px;
+}
+
+.cafe{
+position: relative;
+bottom: 50px;
+}
+/*end*/

@@ -1,0 +1,39 @@
+/*modify*/
+::placeholder {
+
+  font-size: 20px;
+  font-weight: 400;
+  opacity: 1;
+}
+input{
+        border-style:none;
+        border-bottom:solid 1px #cacaca;
+        border-collapse:collapse;
+}
+
+table,h1,div{
+   width: 60%;
+   margin: 0 auto;
+}
+
+.file-img {
+   width: 20px;
+   height: 20px;
+   cursor: pointer;
+}
+
+#attach-file, #delete-file {
+   display: none;
+}
+
+img {
+   vertical-align: middle;
+}
+
+#file-upload{
+width:100%;
+height:70px;
+display:inline;
+}
+
+/*end*/

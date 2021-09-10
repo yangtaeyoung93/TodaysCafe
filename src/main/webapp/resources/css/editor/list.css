@@ -1,0 +1,6 @@
+/*editor/list*/
+h1,#list-top { width: 60%; margin: 0 auto; }
+#imagelist { float:left; width: 100%; text-align: center; margin: 0 auto; }
+#image { padding: 10px; display: inline-block; }
+a:hover { opacity: 0.5; cursor: pointer; }
+/*end*/

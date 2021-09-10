@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper">
+	
+	<insert id="insertlist">
+		insert into json_store(id,lat, lng, name, vicinity)
+		values(seq_json_store.nextval , #{lat}, #{lng}, #{name}, #{vicinity})
+	</insert>
+	<!-- 
+	select id, storename, address,tel, lat, lng, close,filename, filepath from c_store left outer join c_upload using (id)
+		 where lower(storename) like '%' || #{searchText} || '%' or address  like '%' || #{searchText} || '%' -->
+
+	 <select id="searchList" resultType="data.JsonDTO">
+      select a.id,storename, address,tel, lat, lng, close, smoke, parking, pet, seat from c_store a left outer join c_option c on (a.id=c.id)
+       where lower(storename) like '%' || #{searchText} || '%' or address  like '%' || #{searchText} || '%'
+   </select>
+ <select id="andsearchList" resultType="data.JsonDTO">
+      select a.id,storename, address,tel, lat, lng, close,filename, filepath, smoke, parking, pet, seat from c_store a left outer join c_upload b on (a.id=b.id) left outer join c_option c on (a.id=c.id)
+       where lower(storename) like '%' || #{searchText} || '%' or address  like '%' || #{searchText} || '%'
+   </select>
+
+	
+	<!-- select id, storename, address,tel, lat, lng, close,filename, filepath, smoke, parking, pet, seat from c_store as a left outer join c_upload as b on a.id= b.id left outer join c_option as c on a.id=c.id -->
+	   <select id="storeList" resultType="data.JsonDTO">
+	      select a.id,storename, address,tel, lat, lng, close, smoke, parking, pet, seat from c_store a left outer join c_option c on (a.id=c.id) order by id
+	    </select>
+	<select id="andstoreList" resultType="data.JsonDTO">
+            select a.id,storename, address,tel, lat, lng, close,filename, filepath, smoke, parking, pet, seat from c_store a left outer join c_upload b on (a.id=b.id) left outer join c_option c on (a.id=c.id) order by a.id 
+    </select>
+	<select id="optionList" resultType="data.JsonDTO">
+         select a.id,storename, address,tel, lat, lng, close, smoke, parking, pet, seat from c_store a left outer join c_option c on (a.id=c.id) 
+         <choose><when test= 'smoking.equals("X") and pet.equals("X") and parking.equals("X") and searchText==null'> </when> <otherwise>where </otherwise> </choose>
+         
+         <choose><when test= 'smoking.equals("O")'> smoke = #{smoking} <if test= 'pet.equals("O")'> and pet = #{pet}</if><if test= 'parking.equals("O")'> and parking = #{parking}</if> <if test='searchText != null'>and lower(storename) like '%' || #{searchText} || '%'</if> </when> </choose>
+         
+         <choose><when test= 'smoking.equals("X")'> 
+            <choose><when test= 'pet.equals("O")'> pet = #{pet} 
+                     <if test= 'parking.equals("O")'> and parking = #{parking}</if>
+                     <if test='searchText != null'>and lower(storename) like '%' || #{searchText} || '%'</if> 
+                  </when>
+            <!-- <otherwise> <if test= 'parking.equals("O")'> parking = #{parking}</if></otherwise> -->
+            </choose></when> 
+         </choose>
+         
+         <if test = 'smoking.equals("X")'>
+	         <if test= 'pet.equals("X")'>
+	            <choose><when test= 'parking.equals("O")'> parking = #{parking}
+	               <if test='searchText != null'>and lower(storename) like '%' || #{searchText} || '%'</if> 
+	               </when>
+		            <otherwise><if test='searchText != null'> lower(storename) like '%' || #{searchText} || '%'</if>
+		            </otherwise>
+	            </choose>
+	         
+	         </if>
+         </if>
+         
+   </select>
+
+	
+	<select id="smokingList" resultType="data.JsonDTO">
+      select * from c_option left outer join c_store using (id) where smoke = 'O'
+   </select>
+
+	 <select id="animalList" resultType="data.JsonDTO">
+      	select * from c_option left outer join c_store using (id) where pet = 'O'
+  	 </select>
+	
+	 <select id="parkingList" resultType="data.JsonDTO">
+      	select * from c_option left outer join c_store using (id) where parking = 'O'
+   	</select>
+	 <select id="filepath" resultType="data.FileDTO">
+	      select id,filepath from c_upload
+	 </select>
+	
+	
+	<select id="imgList" resultType="data.ImgVO">
+		select * from c_upload where id =#{id}
+	</select>
+	<select id="reviewList" resultType="data.ReviewVO">
+			select id, storename, address, tel, close, userid, rcomment, score, writedate, reviewid,dbimgpath
+			from c_store
+			inner join c_review
+			using(id)
+			where id=#{id} order by writedate desc 
+	</select>
+	<insert id="bookmarkInsert">
+		insert into c_bookmark(userid,id,storename,address,tel) values(#{userid},#{id},#{storename},#{address},#{tel})
+	</insert>
+	<delete id="bookmarkDelete">
+		delete from c_bookmark where id =#{id} and userid=#{userid}
+	</delete>
+	<insert id="reviewInsert">
+		insert into
+		c_review(id,userid,rcomment,score,dbimgpath)
+		values((select id from c_store where id =#{id}),(select userid from c_member where userid=#{userid}),#{rcomment},#{score},#{dbimgpath})
+	</insert>
+	<delete id="reviewDelete">
+	
+			delete from c_review where reviewid=#{reviewid}
+	</delete>
+	<update id="reviewModify">
+		update c_review set rcomment=#{rcomment}, score=#{score} where reviewid=#{reviewid}
+	</update>
+	<select id="bookmarkList" resultType="Integer">
+		select count(*) from c_bookmark where id =#{id} and email=#{email}
+	</select>
+	<insert id="ImgInsert">
+      insert into c_upload(id,filename,filepath)
+      values((select id from c_store where id= 1),#{filename,jdbcType=VARCHAR},#{filepath,jdbcType=VARCHAR})
+   </insert>
+	<select id="profileimg" resultType="data.ReviewVO">
+		select d.userid,replace(d.dbimgpath, '\', '/')  dbimgpath, r.id,r.reviewid  from c_member d inner join c_review r on d.userid=r.userid
+	</select>
+	
+</mapper>
