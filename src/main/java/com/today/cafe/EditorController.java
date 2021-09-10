@@ -31,18 +31,6 @@ public class EditorController {
    @Autowired
    EditorServiceImpl service;
 
-   // 안드로이드-서버 연결
-   /*
-    * @ResponseBody
-    * 
-    * @RequestMapping("/apapap") public Map<String, List<EditorVO>> apapap() {
-    * List<EditorVO> EditorVO = service.aplist();
-    * 
-    * Map<String, List<EditorVO>> EditorVal = new HashMap<String,
-    * List<EditorVO>>(); EditorVal.put("contacts", EditorVO);
-    * 
-    * return EditorVal; }
-    */
    
    // 글 목록 화면 요청
    @RequestMapping("/list.er")
