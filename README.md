@@ -4,8 +4,8 @@ TodaysCafe
 ## 개발환경
 - 언어 : java 8
 - DB : Oracle
-- Spring : 4.7
-- WAS : Tomcat 3.2.2
+- Spring : 3.2
+- WAS : Tomcat
 
 
 ## 개발 목적 및 요구사항
