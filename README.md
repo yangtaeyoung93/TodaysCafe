@@ -18,5 +18,6 @@ TodaysCafe
 
 
   
-### data -> cafeInfo 패키지 분리  
-###  URL 메소드 수정 
+#### data -> cafeInfo 패키지 분리  
+####  URL 메소드 수정 
+#### google api -> naver api 변경  
