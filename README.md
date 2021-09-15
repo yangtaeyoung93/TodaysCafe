@@ -17,7 +17,7 @@ TodaysCafe
  - 별점기능을 이용해 카페 후기를 남길 수 있도록 개발
 
 
-  # 수정
-#### data -> cafeInfo 패키지 분리  
-####  URL 메소드 수정 
-#### google api -> naver api 변경  
+  ## 수정
+- data -> cafeInfo 패키지 분리  
+-  URL 메소드 수정 
+- google api -> naver api 변경  
