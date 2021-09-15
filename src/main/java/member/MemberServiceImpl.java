@@ -27,7 +27,6 @@ public class MemberServiceImpl implements MemberService {
 
    @Override
    public boolean update(MemberVO vo) {
-      // TODO Auto-generated method stub
       return false;
    }
 
@@ -40,7 +39,6 @@ public class MemberServiceImpl implements MemberService {
    //3. 웹 로그인
       @Override
       public MemberVO weblogin(HashMap map) {
-         System.out.println("MemberServiceImpl MemberDAO" + map);
          return dao.weblogin(map);
       }
 
@@ -60,7 +58,6 @@ public class MemberServiceImpl implements MemberService {
       //1. 앱 로그인
          @Override
          public MemberVO applogin(HashMap map) {
-            System.out.println("MemberServiceImpl" + map);
             return dao.applogin(map);
          }
 
@@ -127,40 +124,34 @@ public class MemberServiceImpl implements MemberService {
   	//5. appResponse
   	@Override
   	public MemberVO androidResponse(String email) {
-  		// TODO Auto-generated method stub
   		return dao.androidResponse(email);
   	}
 
   		
   	@Override
   	public MemberVO selectMember(String email) {
-  		// TODO Auto-generated method stub
   		return dao.selectMember(email);
   	}
 
   	
   	@Override
   	public boolean insertNaver(HashMap map) {
-  		// TODO Auto-generated method stub
   		return dao.insertNaver(map);
   	}
   	
   	//DB != NAVER = NAVER LOGIN
   	@Override
   	public boolean insertNaverweb(String email) {
-  		// TODO Auto-generated method stub
   		return false;
   	}
 
   	@Override
   	public MemberVO webResponse(String email) {
-  		// TODO Auto-generated method stub
   		return dao.webResponse(email);
   	}
 
   	@Override
   	public MemberVO insertNaverweb(HashMap map) {
-  		// TODO Auto-generated method stub
   		return dao.insertNaverweb(map);
   	}
       

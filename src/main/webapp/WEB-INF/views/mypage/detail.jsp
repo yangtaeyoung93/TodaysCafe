@@ -17,7 +17,7 @@
          <div class="content">
                         
             <div class="signup-cont cont">
-               <form action="update.my" method="post" enctype="multipart/form-data" onsubmit="return fnCheck()">
+               <form action="/mypage/update" method="post" enctype="multipart/form-data" onsubmit="return fnCheck()">
                   <input type="hidden" name="admin" value="n" />
                   <input type="hidden" name="authstatus" value="1" />
                   

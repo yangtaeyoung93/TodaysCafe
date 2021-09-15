@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EditorServiceImpl implements com.todays.cafe.domain.editor.EditorService {
+public class EditorServiceImpl implements EditorService {
    @Autowired private EditorDAO dao;
    
    @Override
@@ -45,10 +45,6 @@ public class EditorServiceImpl implements com.todays.cafe.domain.editor.EditorSe
       return dao.delete(title);
    }
 
-/*   @Override
-   public List<EditorVO> aplist() {
-      return dao.aplist();
-   }*/
 
    @Override
    public boolean insert_f(FileUploadVO fvo) {

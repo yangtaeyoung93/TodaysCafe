@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +8,7 @@
 </head>
 <body>
 <h3>회원 정보 수정</h3>
-<form action="update.my" method="post" enctype="multipart/form-data">
+<form action="/mypage/update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="email" value="${vo.email}"/>
 <table>
 	<tr>
@@ -43,7 +41,7 @@
 		<td colspan="2">
 		<input type="hidden"  name="attach"  id="attach"/>
 			<input type="submit" value="회원 정보 수정" id="usermodify"/>
-			<a class="btn-empty" onclick="location='detail.my?email=${login_info.email}'" id="cancel">수정 취소</a>
+			<a class="btn-empty" onclick="location='/mypage/detail?email=${login_info.email}'" id="cancel">수정 취소</a>
 		</td>
 		
 	</tr>

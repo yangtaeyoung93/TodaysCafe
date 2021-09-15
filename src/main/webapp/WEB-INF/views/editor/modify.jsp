@@ -8,7 +8,7 @@
 </head>
 <body>
 <br><h1>EDITOR REVIEW</h1><br>
-<form action="update.er" method="post" enctype="multipart/form-data">
+<form action="/editor/update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="title" value="${vo.title }">    
 <input type="hidden" name="id" value="${vo.id }">    
    <table>
@@ -38,7 +38,7 @@
 <div align="center">
       <input type="hidden" name="attach" id="attach"/>
       <a class="btn-fill" onclick="if(necessary()){$('form').submit()}">저장</a>
-      <a class="btn-empty" onclick="location='detail.er?title=${vo.title}'">취소</a>
+      <a class="btn-empty" onclick="location='/editor/detail?title=${vo.title}'">취소</a>
 </div>
 </form>
 </body>

@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="iot" target="1.6" />
+      <module name="iot" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <br><h1>QNA</h1><br>
 
 <div style="display:inline; min-width: 100%" align="center">
-<form method="post" action="list.qa" id="list">
+<form method="get" action="/qna/list" id="list">
 	<div style="display:inline; float:left; width: 75%;" align="right";>
 	<select name="search" style="height: 28px; width: 92px;">
 				<option value="all" ${page.search eq 'all'?'selected':'' }>전체</option>
@@ -21,7 +21,7 @@
 	</div>
 	<div style="display:inline;float:left; width: 25%; text-align:left; ">
 	<c:if test="${!empty login_info.email }">
-		<a onclick="location='new.qa'">&nbsp;&nbsp;&nbsp;&nbsp;글쓰기</a>
+		<a onclick="location='/qna/new'">&nbsp;&nbsp;&nbsp;&nbsp;글쓰기</a>
 	</c:if>
 	</div>
 <input type="hidden" name="curPage"/>
@@ -53,7 +53,7 @@
          	<c:forEach var="i" begin="1" end="${vo.indent}">
          	${i eq vo.indent?'<img src="img/re.png" style="width:15px">':'&nbsp;&nbsp;' }
          	</c:forEach>
-         	<a onclick="location='detail.qa?id=${vo.id}&read=1'">${vo.title }</a>
+         	<a onclick="location='/qna/detail?id=${vo.id}&read=1'">${vo.title }</a>
          </td>
          <td align="center" >${vo.writer }</td>
          <td align="center" >${vo.writedate}</td>

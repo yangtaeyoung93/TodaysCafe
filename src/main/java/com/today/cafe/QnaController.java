@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,13 +21,13 @@ import qna.QnaServiceImpl;
 import qna.QnaVO;
 
 @Controller
+@RequestMapping(value = "/qna")
 public class QnaController {
 	@Autowired private QnaServiceImpl service;
 	@Autowired private CommonService common;
 	@Autowired QnaPage page;
 	
-	//�۸�� ȭ�� ��û
-	@RequestMapping("/list.qa")
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String list(Model model,@RequestParam(defaultValue="1") int curPage,String search, String keyword) {
 		page.setCurPage(curPage); 
 		page.setSearch(search);
@@ -36,28 +37,22 @@ public class QnaController {
 		return "qna/list";
 	}
 	
-	//���� �ۼ� ȭ�� ��û
-	@RequestMapping("/new.qa")
+	@RequestMapping(value = "/new",method = RequestMethod.GET)
 	public String qna() {
 		return "qna/new";
 	}
-	//���� ���� ó�� ��û
-	@RequestMapping("/insert.qa")
+
+	@RequestMapping(value = "/insert",method = RequestMethod.POST)
 	public String insert(QnaVO vo,MultipartFile file,HttpSession session) {
-		//�ۼ���(userid) ��� ó�� �ؾ���
-		System.out.println(vo.getWriter());
-		//÷������
 		if(file.getSize()>0) {
 			vo.setFilename(file.getOriginalFilename());
 			vo.setFilepath(common.upload("qna", file, session));
 		}
-		
 		service.insert(vo);
 		return "redirect:list.qa";
 	}
 	
-	//�� ��ȭ�� ��û
-	@RequestMapping("/detail.qa")
+	@RequestMapping(value = "/detail",method = RequestMethod.GET)
 	public String detail(Model model, int id, @RequestParam(defaultValue="0") int read) {
 		if(read==1) {
 				service.read(id);
@@ -69,10 +64,8 @@ public class QnaController {
 		
 		return "qna/detail";
 	}
-	
-	
-	//�� ���� ó�� ��û
-	@RequestMapping("/delete.qa")
+
+	@RequestMapping(value = "/delete",method = RequestMethod.DELETE)
 	public String delete(int id,HttpSession session) {
 		File f= new File(session.getServletContext().getRealPath("resources"+service.detail(id).getFilepath()) );
 			if (f.exists()) f.delete();
@@ -80,16 +73,14 @@ public class QnaController {
 		return "redirect:list.qa";
 	}
 	
-	//�� ���� ȭ�� ��û
-	@RequestMapping("/modify.qa")
+	@RequestMapping(value = "/update",method = RequestMethod.GET)
 	public String modify(int id,Model model) {
 		model.addAttribute("vo",service.detail(id));
 		
 		return "qna/modify";
 	}
 	
-	//�� ���� ó�� ��û
-	@RequestMapping("/update.qa")
+	@RequestMapping(value = "/update",method = RequestMethod.POST)
 	public String update(QnaVO vo, MultipartFile file,HttpSession session,String attach ) {
 		QnaVO qna=service.detail(vo.getId());
 		
@@ -113,15 +104,13 @@ public class QnaController {
 		return "redirect:detail.qa?id="+vo.getId();
 	}
 	
-	//��� �ۼ�ȭ�� ��û
-	@RequestMapping("/reply.qa")
+	@RequestMapping(value = "/reply",method = RequestMethod.GET)
 	public String reply(int id,Model model) {
 		model.addAttribute("vo",service.detail(id));
 		return "qna/reply";
 	}
 	
-	//��� ���� ó�� ��û
-	@RequestMapping("/reply_insert.qa")
+	@RequestMapping(value = "/insert-reply",method = RequestMethod.POST)
 	public String reply_insert(QnaVO vo,MultipartFile file,HttpSession session) {
 		if (file.getSize()>0) {
 			vo.setFilename(file.getOriginalFilename());

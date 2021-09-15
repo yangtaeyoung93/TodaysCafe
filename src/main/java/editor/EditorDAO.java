@@ -7,25 +7,25 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class EditorDAO implements com.todays.cafe.domain.editor.EditorService {
+public class EditorDAO implements EditorService {
    @Autowired private SqlSession sql;
    
    @Override
-   public List<com.todays.cafe.domain.editor.EditorVO> list() {
+   public List<EditorVO> list() {
       return sql.selectList("editor.mapper.list", "");
    }
 
    @Override
-   public boolean insert(com.todays.cafe.domain.editor.EditorVO vo) {
+   public boolean insert(EditorVO vo) {
       return sql.insert("editor.mapper.insert", vo)>0? true:false;
    }
 
    @Override
-   public List<com.todays.cafe.domain.editor.EditorVO> list(String keyword) {
+   public List<EditorVO> list(String keyword) {
       return sql.selectList("editor.mapper.list", keyword);
    }
    @Override
-   public com.todays.cafe.domain.editor.EditorVO detail(String title) {
+   public EditorVO detail(String title) {
       return sql.selectOne("editor.mapper.detail", title);
    }
 
@@ -35,7 +35,7 @@ public class EditorDAO implements com.todays.cafe.domain.editor.EditorService {
    }
 
    @Override
-   public boolean update(com.todays.cafe.domain.editor.EditorVO vo) {
+   public boolean update(EditorVO vo) {
       return sql.update("editor.mapper.update",vo)>0?true:false;
    }
 
@@ -55,7 +55,7 @@ public class EditorDAO implements com.todays.cafe.domain.editor.EditorService {
    }
 
    @Override
-   public List<com.todays.cafe.domain.editor.EditorVO> detail_f(String title) {
+   public List<EditorVO> detail_f(String title) {
       return sql.selectList("editor.mapper.detail_f", title);
    }
 

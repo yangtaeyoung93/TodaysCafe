@@ -1,39 +1,34 @@
 package editor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class EditorVO {
    private int id,readcnt,no,file_cnt;
    private String title, content, writer, name,filepath,filename;
    //writer: 로그인한 사용자 :userid
    //name: 로그인한 회원명
-   private Date writedate;
-      
+   private LocalDate writedate;
 
-
-
-
-
-public int getFile_cnt() {
+   public int getFile_cnt() {
       return file_cnt;
    }
    public void setFile_cnt(int file_cnt) {
       this.file_cnt = file_cnt;
    }
-
    public String getFilepath() {
 	return filepath;
 }
-public void setFilepath(String filepath) {
+   public void setFilepath(String filepath) {
 	this.filepath = filepath;
 }
-public String getFilename() {
+   public String getFilename() {
 	return filename;
 }
-public void setFilename(String filename) {
+   public void setFilename(String filename) {
 	this.filename = filename;
 }
-public int getId() {
+   public int getId() {
       return id;
    }
    public void setId(int id) {
@@ -75,10 +70,10 @@ public int getId() {
    public void setName(String name) {
       this.name = name;
    }
-   public Date getWritedate() {
+   public LocalDate getWritedate() {
       return writedate;
    }
-   public void setWritedate(Date writedate) {
+   public void setWritedate(LocalDate writedate) {
       this.writedate = writedate;
    }
 }

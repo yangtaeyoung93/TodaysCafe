@@ -41,16 +41,10 @@ public class MemberController {
 
 	// 회원가입 처리
 	@ResponseBody
-	@RequestMapping(value = "/join.mo", produces = "text/html; charset=utf-8", method = RequestMethod.POST)
+	@RequestMapping(value = "/join", produces = "text/html; charset=utf-8", method = RequestMethod.POST)
 	public String join(MemberVO vo, HttpSession session, MultipartFile file) {
-		/*
-		 * String basicsprofile = "192.168.0.66/cafe/resources/img/base.png";
-		 * vo.setDbimgpath(basicsprofile); vo.setFileName("base.png");
-		 */
-		// 가입시에 난수를 만들어서 인증메일로 보냄
 
-		System.out.println("===email==" + vo.getEmail());
-		System.out.println("===file==" + file.getOriginalFilename());
+		// 가입시에 난수를 만들어서 인증메일로 보냄
 		if (file.getSize() > 0) {
 			vo.setFileName(file.getOriginalFilename());
 			vo.setDbimgpath(common.profileFile(file, vo, session));
@@ -61,12 +55,10 @@ public class MemberController {
 		}
 		String email= vo.getEmail();
 		String[] array=email.split("@");
-        for(int i =0; i<array.length; i++){
-            System.out.println("======"+array[i]);
-        }
         String userid=array[0];
+
         vo.setUserid(userid);
-		System.out.println("=========dbimgpath==" + vo.getDbimgpath());
+
 		StringBuffer sb = new StringBuffer("<script type='text/javascript'>");
 		// 회원가입
 		if (service.join(vo)) {
@@ -125,16 +117,5 @@ public class MemberController {
 		return authstatus;
 	}
 
-/*	// 3. 웹 로그아웃AppMembeerController에있는 로그아웃메서드로 대체
-	@ResponseBody
-	@RequestMapping("/weblogout")
-	public String logout(HttpSession session) {
-
-		
-		session.removeAttribute("login_info");
-		session.invalidate();
-		
-		return "cafe/weblogin";
-	}*/
 
 }

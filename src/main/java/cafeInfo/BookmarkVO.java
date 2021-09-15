@@ -1,4 +1,4 @@
-package data;
+package cafeInfo;
 
 public class BookmarkVO {
 	private int id;
@@ -8,39 +8,8 @@ public class BookmarkVO {
 	private String address;
 	private String tel;
 	private int count;
-	
-	
-	public BookmarkVO(int id, String userid, String storename, String email, String dbimgpath, String address,
-			String tel) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.dbimgpath = dbimgpath;
-		this.storename = storename;
-		this.address = address;
-		this.tel = tel;
-	}
-	public BookmarkVO(int id, String storename, String address, String tel) {
-		super();
-		this.id = id;
-		this.storename = storename;
-		this.address = address;
-		this.tel = tel;
-	}
-	
-	public BookmarkVO(int id, String email, String storename, String address, String tel) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.storename = storename;
-		this.address = address;
-		this.tel = tel;
-		
-	}
-	
-	
-	
-	
+	private boolean bookmark;
+
 	public BookmarkVO(String email,int id) {
 		super();
 		this.email = email;
@@ -89,7 +58,14 @@ public class BookmarkVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
-	
-	
+
+	public boolean isBookmark() {
+		return bookmark;
+	}
+
+	public void setBookmark(boolean bookmark) {
+		this.bookmark = bookmark;
+	}
+
+
 }

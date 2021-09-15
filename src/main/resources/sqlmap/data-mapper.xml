@@ -73,10 +73,10 @@
 	 </select>
 	
 	
-	<select id="imgList" resultType="data.ImgVO">
+	<select id="imgList" resultType="cafeInfo.ImgVO">
 		select * from c_upload where id =#{id}
 	</select>
-	<select id="reviewList" resultType="data.ReviewVO">
+	<select id="reviewList" resultType="cafeInfo.ReviewVO">
 			select id, storename, address, tel, close, userid, rcomment, score, writedate, reviewid,dbimgpath
 			from c_store
 			inner join c_review
@@ -108,7 +108,7 @@
       insert into c_upload(id,filename,filepath)
       values((select id from c_store where id= 1),#{filename,jdbcType=VARCHAR},#{filepath,jdbcType=VARCHAR})
    </insert>
-	<select id="profileimg" resultType="data.ReviewVO">
+	<select id="profileimg" resultType="cafeInfo.ReviewVO">
 		select d.userid,replace(d.dbimgpath, '\', '/')  dbimgpath, r.id,r.reviewid  from c_member d inner join c_review r on d.userid=r.userid
 	</select>
 	

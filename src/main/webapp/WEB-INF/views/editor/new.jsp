@@ -8,7 +8,7 @@
 </head>
 <body>
    <br><h1>EDITOR REVIEW</h1><br><br>
-<form action="insert.er" method="post" enctype="multipart/form-data">
+<form action="/editor/insert" method="post" enctype="multipart/form-data">
 <input type="hidden" name="writer" value="${ login_info.userid}"/>
    <table>
    <tr>
@@ -27,7 +27,7 @@
    </table><br>
    <div align="center">
    <a class="btn-fill" onclick="if(necessary()){$('form').submit()}">저장</a>
-   <a class="btn-empty" onclick="location='list.er'">취소</a>
+   <a class="btn-empty" onclick="location='/editor/list'">취소</a>
    </div>
 </form>
 </body>

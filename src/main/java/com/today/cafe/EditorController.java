@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,13 +28,14 @@ import editor.FileUploadVO;
 import notice.NoticeVO;
 
 @Controller
+@RequestMapping("/editor")
 public class EditorController {
    @Autowired
    EditorServiceImpl service;
 
    
    // 글 목록 화면 요청
-   @RequestMapping("/list.er")
+   @RequestMapping(value = "/list",method = RequestMethod.GET)
    public String list(Model model, String keyword) {
       if (keyword != null) {
          model.addAttribute("vo", service.list(keyword));
@@ -46,18 +48,18 @@ public class EditorController {
    }
 
    // 새글 작성 화면 요청
-   @RequestMapping("/new.er")
+   @RequestMapping(value = "/new",method = RequestMethod.GET)
    public String editor() {
       return "editor/new";
    }
 
    // 새글 저장 처리 요청
-   @RequestMapping("/insert.er")
-   public String insert(EditorVO vo, FileUploadVO fvo, MultipartHttpServletRequest mtfRequest) {
+   @RequestMapping(value = "/insert",method = RequestMethod.POST)
+   public String insert(EditorVO vo, FileUploadVO fvo, MultipartHttpServletRequest mtfRequest,HttpSession session) {
 
       List<MultipartFile> fileList = mtfRequest.getFiles("file");
-
-      String path = "D:/Study_Spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/cafe/resources/upload/editor/";
+      String path = session.getServletContext().getRealPath("resources");
+      path += "/upload/editor/";
       service.insert(vo);
 
       for (MultipartFile mf : fileList) {
@@ -90,7 +92,7 @@ public class EditorController {
    }
 
    // 글 상세화면 요청
-   @RequestMapping("/detail.er")
+   @RequestMapping(value = "/detail",method = RequestMethod.GET)
    public String detail(Model model, String title, @RequestParam(defaultValue = "0") int read) {
       EditorVO list = service.detail(title);
       List<EditorVO> list_f = service.detail_f(title);
@@ -111,7 +113,7 @@ public class EditorController {
    }
 
    // 글 삭제 요청 처리
-   @RequestMapping("/delete.er")
+   @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
    public String delete(String title) {
       service.delete(title);
       service.delete_f(title);
@@ -119,7 +121,7 @@ public class EditorController {
    }
 
    // 글 수정 화면 요청
-   @RequestMapping("/modify.er")
+   @RequestMapping(value = "/update",method = RequestMethod.GET)
    public String modify(String title, Model model) {
       EditorVO list = service.detail(title);
       List<EditorVO> list_f = service.detail_f(title);
@@ -131,18 +133,17 @@ public class EditorController {
    }
 
    // 글 수정 처리 요청
-      @RequestMapping("/update.er")
-      public String update(EditorVO vo, FileUploadVO fvo, MultipartHttpServletRequest mtfRequest) {
+      @RequestMapping(value = "/update",method = RequestMethod.POST)
+      public String update(EditorVO vo, FileUploadVO fvo, MultipartHttpServletRequest mtfRequest,HttpSession session) {
          EditorVO editor = service.detail(vo.getTitle());
          List<EditorVO> editor_f = service.detail_f(vo.getTitle());
          String title = vo.getTitle();
-         /* String title = vo.getTitle().substring(0, vo.getTitle().indexOf(",")); */
 
          if (editor_f.size() != 0) { 
-            for (int i = 0; i < editor_f.size(); i++) { 
-               String path = "D:/Study_Spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/cafe/resources/upload/editor/";
+            for (int i = 0; i < editor_f.size(); i++) {
+               String path = session.getServletContext().getRealPath("resources");
+               path += "/upload/editor/";
                String uuid = editor_f.get(i).getFilepath();
-               String fname = editor_f.get(i).getFilename();
                String safefile = path + uuid;
 
                File f = new File(safefile);
@@ -190,6 +191,6 @@ public class EditorController {
          }
 
          service.update(vo);
-         return "redirect:detail.er?title=" + title;
+         return "redirect:/editor/detail?title=" + title;
       }
 }

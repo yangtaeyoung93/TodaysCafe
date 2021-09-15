@@ -5,8 +5,6 @@ import java.sql.Date;
 public class QnaVO {
 	private int id,readcnt,no;
 	private String title, content, writer, name;
-	//writer: �α����� ����� :userid
-	//name: �α����� ȸ����
 	private Date writedate;
 	private String filename, filepath;
 	private int root, step, indent;

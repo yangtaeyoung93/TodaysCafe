@@ -11,15 +11,7 @@ import member.MemberVO;
 public class MypageServiceImpl implements MypageService{
 	@Autowired private MypageDAO dao;
 	
-	
-/*	//프로필
-	@Override
-	public MypageVO profill(String email) {
-		System.out.println("service - " + dao.profill(email) + " - " + email);
-		return dao.profill(email);
-	}*/
 
-	
 	//즐겨찾기
 	@Override
 	public List<BookmarkVO> list(String email) {
@@ -31,11 +23,6 @@ public class MypageServiceImpl implements MypageService{
 		return dao.insert(vo);
 	}
 
-	@Override
-	public void read(String userid) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	//프로필디테일페이지요청 db리스트 뿌리기
 	@Override

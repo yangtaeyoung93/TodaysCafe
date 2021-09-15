@@ -1,4 +1,4 @@
-package data;
+package cafeInfo;
 
 public class ReviewVO {
 	private int id;
@@ -39,14 +39,14 @@ public class ReviewVO {
 
 
 
-	public ReviewVO(int id, String userid, String dbimgpath, int reviewid) {
+	/*public ReviewVO(int id, String userid, String dbimgpath, int reviewid) {
 		super();
 		this.id = id;
 		this.userid = userid;
 		this.dbimgpath = dbimgpath;
 		this.reviewid = reviewid;
 	}
-
+*/
 
 
 

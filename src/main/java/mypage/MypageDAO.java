@@ -12,20 +12,6 @@ import member.MemberVO;
 public class MypageDAO implements MypageService{
 	@Autowired private SqlSession sql;
 	
-	
-
-	
-	/*//프로필
-	@Override
-	public MypageVO profill(String userid) {
-		System.out.println("DAO : " + userid);
-		MypageVO vo = new MypageVO();
-		vo = sql.selectOne("mypage.mapper.profill",userid);
-		System.out.println("DAO - " + vo + " - " + userid);
-		return vo;
-	}
-*/
-	
 	//즐겨찾기목록
 	@Override
 	public List<BookmarkVO> list(String email) {
@@ -33,19 +19,10 @@ public class MypageDAO implements MypageService{
 		return list;
 	}
 
-
 	public boolean insert(MypageVO vo) {
-		// TODO Auto-generated method stub
 		return sql.insert("mypage.mapper.insert",vo)>0?true:false;
 	}
 
-
-	@Override
-	public void read(String userid) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	//프로필디테일페이지요청 db리스트 뿌리기
 	@Override
 	public MypageVO detail(String email) {
@@ -54,21 +31,16 @@ public class MypageDAO implements MypageService{
 		return vo;
 	}
 
-
-	
 	@Override
 	public boolean update(MypageVO vo) {
 		return sql.update("mypage.mapper.update", vo)>0?true:false;
 	}
-
 
 	@Override
 	public boolean delete(String email) {
 		return sql.delete("mypage.mapper.delete", email)>0 ? true:false;
 	}
 
-
-	
 	//프로필
 	@Override
 	public MemberVO selectMember(String email) {

@@ -89,7 +89,8 @@ function search_click(id1, storename, address, tel, lat, lng, close){
       // 가게 사진 데이터 가져오기
       $.ajax({
          data : {id : id},
-         url : 'imgList',
+         url : '/cafe/info/list',
+         type:'get',
          dataType : 'json',
          success : function(data) {
             var image = 'http://112.164.58.217/cafe/resources';
@@ -118,7 +119,6 @@ function search_click(id1, storename, address, tel, lat, lng, close){
             },
 
          error : function(req, text) {
-            //alert(test + ":" + req.status);
          }
       });
 
@@ -127,7 +127,8 @@ function search_click(id1, storename, address, tel, lat, lng, close){
       //가게 정보 가져오기
       $.ajax({
     	  data : {id : id},
-          url : 'storedetail',
+          url : '/cafe/info/detail',
+          type:'get',
           dataType : 'json',
           success : function(data){
         	  $('.storename').empty();
@@ -163,7 +164,8 @@ function search_click(id1, storename, address, tel, lat, lng, close){
       //리뷰 데이터 가져오기
       $.ajax({
          data : {id : id},
-         url : 'reviewList',
+         type:'get',
+         url : '/cafe/info/reviews',
          dataType : 'json',
          success : function(data){
 
@@ -230,7 +232,8 @@ function search_click(id1, storename, address, tel, lat, lng, close){
                $.ajax({
 
                data:{id1:id,email: "${login_info.email}" },
-               url : 'bookmarkList',
+               url : '/cafe/info/bookmark-list',
+               type:'POST',
                success:function(data){
                   var count = JSON.stringify(data);
                   if(count=="1"){
@@ -279,50 +282,50 @@ var idx="true";
 function iot(id){
    if(idx == "true"){
    	//true일때 가게 사진이 사라지고, iot 데이터가 나타남
-						 $('.storeimg').empty();
-					      $('<div><form id="iotform"><p class="ptag">Date : <input type="text" id="datepicker" /><a onclick="table('+id+')" style="cursor:pointer;"><i class="axi axi-search" title="검색"></i></a><a id="videocam" onclick=video()><i class="axi axi-videocam" title="실시간 가게 상황"></i> </a></p></form></div>').appendTo('.storeimg');
-					      $( "#datepicker" ).datepicker({dateFormat : 'yy-mm-dd',
-					                              changeMonth : true,
-					                              monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-					                              changeYear: true,
-					                              nextText: '다음 달',
-					                              prevText: '이전 달',
-					                              closeText: '닫기',
-					                              beforeShowDay: after
-					      });
-					      // 그래프가 들어올 div
-					      $('<div id="Line_Controls_Chart">'
-					      +'<div id ="lineChartArea"></div>'
-					      +'<div id="controlsArea" style="display:none;"></div>'
-					      +'</div>').appendTo('.storeimg');
-					      // iot 테이블의 총 개수를 가져오는 통신
-					      $.ajax({
-					    	 data:{id1 : id},
-					    	 dataType : 'json',
-					    	 type : 'POST',
-					    	 url:'iotTableSum',
-					    	 success:function(data){
+        $('.storeimg').empty();
+        $('<div><form id="iotform"><p class="ptag">Date : <input type="text" id="datepicker" /><a onclick="table('+id+')" style="cursor:pointer;"><i class="axi axi-search" title="검색"></i></a><a id="videocam" onclick=video()><i class="axi axi-videocam" title="실시간 가게 상황"></i> </a></p></form></div>').appendTo('.storeimg');
+        $( "#datepicker" ).datepicker({dateFormat : 'yy-mm-dd',
+                              changeMonth : true,
+                              monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                              changeYear: true,
+                              nextText: '다음 달',
+                              prevText: '이전 달',
+                              closeText: '닫기',
+                              beforeShowDay: after
+        });
+        // 그래프가 들어올 div
+        $('<div id="Line_Controls_Chart">'
+        +'<div id ="lineChartArea"></div>'
+        +'<div id="controlsArea" style="display:none;"></div>'
+        +'</div>').appendTo('.storeimg');
+        // iot 테이블의 총 개수를 가져오는 통신
+        $.ajax({
+         data:{id1 : id},
+         dataType : 'json',
+         type : 'POST',
+         url:'iotTableSum',
+         success:function(data){
 
-					    	 $('<hr/>').addClass('hr').appendTo('.storeimg');
-					    	 $('.hr').html('실시간 자리 현황');
-					    	 $('<div id="capacity" >총 테이블   : '+data+' 개</div>').appendTo('.storeimg');
-					    	 },error:function(){
-					    		// alert('해당 카페는 Iot 서비스에 가입되어있지 않습니다');
-					    	 }
-					      });
-					      //iot 테이블에서 사용중인 테이블의 데이터를 가져오는 통신
-					      $.ajax({
-					    	  data:{id1 : id},
-					     	 dataType : 'json',
-					     	 type : 'POST',
-					     	 url:'usingtable',
-					     	 success:function(data){
-					     		$('<div id = realtime>사용중인 테이블 : '+data+' 개</div>').appendTo('.storeimg');
-					     	 },error:function(){
-					    		 alert('해당 카페는 Iot 서비스에 가입되어있지 않습니다');
-					    		opendetail(id);
-					    	 }
-					      });
+         $('<hr/>').addClass('hr').appendTo('.storeimg');
+         $('.hr').html('실시간 자리 현황');
+         $('<div id="capacity" >총 테이블   : '+data+' 개</div>').appendTo('.storeimg');
+         },error:function(){
+            // alert('해당 카페는 Iot 서비스에 가입되어있지 않습니다');
+         }
+        });
+        //iot 테이블에서 사용중인 테이블의 데이터를 가져오는 통신
+        $.ajax({
+          data:{id1 : id},
+         dataType : 'json',
+         type : 'POST',
+         url:'usingtable',
+         success:function(data){
+            $('<div id = realtime>사용중인 테이블 : '+data+' 개</div>').appendTo('.storeimg');
+         },error:function(){
+             alert('해당 카페는 Iot 서비스에 가입되어있지 않습니다');
+            opendetail(id);
+         }
+        });
       idx ="false";
      // false일때 iot정보가 사라지고 다시 팝업창을 호출하여 사진을 불러옴
       }else if(idx =="false"){
@@ -383,9 +386,17 @@ function minusSlides() {
 }
 //즐겨찾기를 추가하거나 삭제하는 함수
 function bookmark(id,storename, address, tel){
+const data{
+    id1 : id,
+    email:${login_info.email},
+    storename:storename,
+    address : address,
+    tel :tel
+  }
    $.ajax({
-   data:{id1:id , email: "${login_info.email}" , storename : storename , address : address, tel : tel},
-   url:'webbookmark',
+   data:data,
+   url:'/cafe/info/bookmark',
+   type:'get',
    success:function(data){
       if(data =="true"){
          alert('즐겨찾기에 추가되었습니다.');
@@ -411,9 +422,19 @@ function comment_insert(id){
       $('.commentbox').focus();
       return;
    }
+
+  const data{
+    id : id,
+    email:${login_info.email},
+    rcomment:rcomment,
+    score : score,
+    dbimgpath : writerimg,
+    admin :admin
+  }
    $.ajax({
-      data:{id:id ,email: "${login_info.email}", rcomment:rcomment, score : score ,dbimgpath : writerimg, admin : admin},
-      url:"reviewInsert",
+      data:data,
+      type:'POST',
+      url:"insert-review",
       success : function(data){
          opendetail(id);
 
@@ -436,8 +457,9 @@ function comment_delete(id,reviewid){
    if(confirm("정말 삭제하시겠습니까?")){
 
       $.ajax({
-         data:{ reviewid1 : reviewid},
-         url:'reviewDelete',
+         data:{ reviewid : reviewid},
+         url:'/cafe/info/delete-review',
+         type:'DELETE',
          success : function(data){
             opendetail(id);
             if(data){

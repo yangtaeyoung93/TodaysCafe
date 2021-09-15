@@ -6,6 +6,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
+import cafeInfo.BookmarkVO;
+import cafeInfo.ImgVO;
+import cafeInfo.ReviewVO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -24,18 +27,13 @@ public class DataServiceImpl implements DataService{
       try {
          HttpURLConnection conn = (HttpURLConnection)new URL(result).openConnection();
          
-         
          JSONParser jsonParser = new JSONParser();
-   
          JSONObject jsonObj = (JSONObject) JSONValue.parse(new InputStreamReader(conn.getInputStream(),"utf-8"));
-         
-         
          JSONArray jsonArr = (JSONArray) jsonObj.get("results");
          
          for(int i = 0; i < jsonArr.size(); i++) {
             JSONObject object = (JSONObject) jsonArr.get(i);
-            System.out.println("Aaaaaaaa"+object);
-            
+
             JSONObject geometry = (JSONObject) object.get("geometry");
             JSONObject location = (JSONObject) geometry.get("location");
             String lat = location.get("lat").toString();
@@ -43,14 +41,7 @@ public class DataServiceImpl implements DataService{
             String name  = (String) object.get("name");
             String vicinity = (String) object.get("vicinity");
             
-            /*JSONObject opening_hours = (JSONObject) object.get("opening_hours");*/
-            
-            System.out.println("object" +lat+"+"+lng+"+"+name+"+"+vicinity);
             DataDTO data = new DataDTO(lat, lng, name, vicinity);
-//            ArrayList<DataDTO> datalist = new ArrayList<DataDTO>();
-//            datalist.add(data);
-            
-//            System.out.println("object" +lat+"+"+lng+"+"+name+"+"+vicinity);
             dao.insertlist(data);
             
          }
@@ -128,12 +119,9 @@ public class DataServiceImpl implements DataService{
    public int bookmarkList(BookmarkVO vo) {
       return dao.bookmarkList(vo);
    }
-	@Override
-	public boolean ImgInsert(FileDTO vo) {
-		return dao.ImgInsert(vo);
-	}
-	@Override
-	public List<ReviewVO> profileimg(ReviewVO vo) {
+
+   @Override
+   public List<ReviewVO> profileimg(ReviewVO vo) {
 		return dao.profileimg(vo);
 	}
    

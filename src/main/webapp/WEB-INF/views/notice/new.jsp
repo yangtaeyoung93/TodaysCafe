@@ -7,7 +7,7 @@
 </head>
 <body>
    <br><h1>NOTICE</h1><br><br>
-<form action="insert.no" method="post" enctype="multipart/form-data">
+<form action="insert" method="post" enctype="multipart/form-data">
 <input type="hidden" name="writer" value="${ login_info.userid}"/>
    <table>
    <tr>
@@ -36,7 +36,7 @@
    </table><br>
    <div align="center">
    <a class="btn-fill" onclick="if(necessary()){$('form').submit()}">저장</a>
-   <a class="btn-empty" onclick="location='list.no'">취소</a>
+   <a class="btn-empty" onclick="location='list'">취소</a>
    </div>
 </form>
 </body>

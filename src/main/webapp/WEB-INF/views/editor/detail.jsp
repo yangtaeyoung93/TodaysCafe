@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +16,10 @@
    <td colspan="6" style="text-align: right; width: 20px;">
    <div style="display:inline; min-width:100%;">
    <div align="left" style="display:inline; float:left; width:20%;">
-    <a onclick="location='list.er'"><img title="목록으로" src="img/back-arrow.png" style="width:20px"></a>&nbsp;
+    <a onclick="location='/editor/list'"><img title="목록으로" src="img/back-arrow.png" style="width:20px"></a>&nbsp;
     <c:if test="${login_info.userid eq vo.writer }">
-    	<a onclick="location='modify.er?title=${vo.title}'"><img title="수정" src="img/eraser.png" style="width:20px"></a>&nbsp;
-    	<a onclick="if(confirm('정말 삭제하시겠습니까?')){location='delete.er?title=${vo.title}'}"><img title="삭제" src="img/delete-button.png" style="width:20px"></a>&nbsp;
+    	<a onclick="location='/editor/update?title=${vo.title}'"><img title="수정" src="img/eraser.png" style="width:20px"></a>&nbsp;
+    	<a onclick="if(confirm('정말 삭제하시겠습니까?')){location='/editor/delete?title=${vo.title}'}"><img title="삭제" src="img/delete-button.png" style="width:20px"></a>&nbsp;
     </c:if>
    </div>
    <div style="display:inline; float:left; width:80%;">

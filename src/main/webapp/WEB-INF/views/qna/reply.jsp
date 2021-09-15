@@ -8,7 +8,7 @@
 <body>
 <br><h1>QNA</h1><br><br><br>
 
-<form action="reply_insert.qa" method="post" enctype="multipart/form-data">
+<form action="/qna/insert-reply" method="post" enctype="multipart/form-data">
 <input type="hidden" name="writer" value="${ login_info.userid}"/>
 	<table>
         <tr>
@@ -38,7 +38,7 @@
 	<br>
 	<div>
         <a class="btn-fill" onclick="if(necessary()){$('form').submit()}">저장</a>
-        <a class="btn-empty" onclick="location='list.qa'">취소</a>
+        <a class="btn-empty" onclick="location='/qna/list'">취소</a>
 	    <input type="hidden" name="id" value="${vo.id }"/>
 		<input type="hidden" name="root" value="${vo.root }"/>
 		<input type="hidden" name="step" value="${vo.step}"/>

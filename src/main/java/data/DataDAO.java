@@ -3,6 +3,9 @@ package data;
 import java.util.HashMap;
 import java.util.List;
 
+import cafeInfo.BookmarkVO;
+import cafeInfo.ImgVO;
+import cafeInfo.ReviewVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -68,9 +71,6 @@ public class DataDAO {
 
    public int bookmarkList(BookmarkVO vo) {
       return sql.selectOne("data.mapper.bookmarkList",vo);
-   }
-   public boolean ImgInsert(FileDTO vo) {
-	   return sql.insert("data.mapper.ImgInsert",vo) > 0 ? true : false;
    }
    public List<ReviewVO> profileimg(ReviewVO vo){
 	return sql.selectList("data.mapper.profileimg",vo);

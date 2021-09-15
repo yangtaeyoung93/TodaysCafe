@@ -21,19 +21,10 @@ public class MemberVO implements Serializable{
 
 
 
-   public MemberVO(String email, String userpwd, String dbimgpath, String fileName, String admin, int authstatus) {
-      super();
-      this.email = email;
-      this.userpwd = userpwd;
-      this.dbimgpath = dbimgpath;
-      this.fileName = fileName;
-      this.admin = admin;
-      this.authstatus = authstatus;
-   }
 
 
-   
-   
+
+
 
 
    public String getUserid() {

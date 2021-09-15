@@ -1,5 +1,9 @@
 package data;
 
+import cafeInfo.BookmarkVO;
+import cafeInfo.ImgVO;
+import cafeInfo.ReviewVO;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,7 +26,6 @@ public interface DataService {
    boolean reviewDelete(int reviewid);
    boolean reviewModify(ReviewVO vo);
    int bookmarkList(BookmarkVO vo);
-   boolean ImgInsert(FileDTO vo);
    List<ReviewVO> profileimg(ReviewVO vo);
 
 }

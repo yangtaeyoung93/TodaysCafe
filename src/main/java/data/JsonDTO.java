@@ -6,33 +6,8 @@ public class JsonDTO {
 
    
    public JsonDTO() {}
-   public JsonDTO(int id, String storename, String address, String tel, String lat, String lng, String close,String filepath, String filename) {
-      super();
-      this.storename = storename;
-      this.address = address;
-      this.tel = tel;
-      this.lat = lat;
-      this.lng = lng;
-      this.close = close;
-      this.id = id;
-   }
-   
 
-   public JsonDTO(String storename, String address, String tel, String lat, String lng, String close, String filename,
-         String filepath, String smoke, String parking, String pet, String seat, int id) {
-      super();
-      this.storename = storename;
-      this.address = address;
-      this.tel = tel;
-      this.lat = lat;
-      this.lng = lng;
-      this.close = close;
-      this.smoke = smoke;
-      this.parking = parking;
-      this.pet = pet;
-      this.seat = seat;
-      this.id = id;
-   }
+
    public String getSmoke() {
       return smoke;
    }

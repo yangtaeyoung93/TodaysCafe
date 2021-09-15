@@ -46,12 +46,7 @@ public class NoticeDAO implements NoticeService {
 
 	@Override
 	public NoticePage list(NoticePage vo) {
-		//�� ��� ���� ���� ��ȸ�� ��,-> ������ ������ total �ʵ忡 ��´�
 				vo.setTotalList((Integer)sql.selectOne("notice.mapper.total",vo));
-				//�� ��� ���� ���� �� ������, �� ��, 
-				//���������� ������ ����/�� ��, ����/�� ������ ��ȣ ���� ��  
-				//-> ������ ���۱� ~ ���ۿ� �ش��ϴ� 10���� ������ ��ȸ
-				
 				List<NoticeVO>list=sql.selectList("notice.mapper.list",vo);
 				vo.setList(list);
 				return vo;

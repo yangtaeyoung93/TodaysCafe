@@ -16,9 +16,6 @@ public class DataDTO {
       this.vicinity = vicinity;
    }
 
-
-
-
    public String getName() {
       return name;
    }

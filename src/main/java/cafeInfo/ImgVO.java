@@ -1,4 +1,4 @@
-package data;
+package cafeInfo;
 
 public class ImgVO {
    private int id;
@@ -10,13 +10,6 @@ public class ImgVO {
    public ImgVO() {}
 
 
-   public ImgVO(int id, String filepath, String filename, String fileid) {
-      super();
-      this.id = id;
-      this.filepath = filepath;
-      this.filename = filename;
-      this.fileid = fileid;
-   }
 
    public int getId() {
       return id;

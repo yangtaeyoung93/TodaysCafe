@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,39 +30,34 @@ public class NoticeController {
 	@Autowired private CommonService common;
 	@Autowired NoticePage page;
 	
-	//�ȵ���̵�-���� ����
 	@ResponseBody
 	@RequestMapping("/nonono") 
 	public Map<String, List<NoticeVO>> apapap(HttpServletRequest httpServletRequest) {
 		List<NoticeVO> NoticeVO = service.nolist();
 
 		Map<String, List<NoticeVO>> NoticeVal = new HashMap<String, List<NoticeVO>>();
-		NoticeVal.put("contacts", NoticeVO); //�����͸� ������ �� key,value�� �����;� �ϱ� ������ Map���� ����� "contacts"->�ȵ���̵忡�� �迭�� ã���ִ� key
+		NoticeVal.put("contacts", NoticeVO);
 		
 		return NoticeVal;
 	}
 	
-	//�۸�� ȭ�� ��û
-	@RequestMapping("/list.no")
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String list(Model model,@RequestParam(defaultValue="1") int curPage,String search, String keyword) {
 		
 		page.setCurPage(curPage); 
 		page.setSearch(search);
 		page.setKeyword(keyword);
 		model.addAttribute("page",service.list(page));
-		
-	
+
 		return "notice/list";
 	}
 	
-	//���� �ۼ� ȭ�� ��û
-		@RequestMapping("/new.no")
+		@RequestMapping(value = "/new.no" ,method = RequestMethod.GET)
 		public String notice() {
 			return "notice/new";
 		}
 		
-	//���� ���� ó�� ��û
-		@RequestMapping("/insert.no")
+		@RequestMapping(value = "/insert",method = RequestMethod.POST)
 		public String insert(NoticeVO vo,MultipartFile file,HttpSession session) {
 			if(file.getSize()>0) {
 				vo.setFilename(file.getOriginalFilename());
@@ -71,8 +67,7 @@ public class NoticeController {
 			return "redirect:list.no";
 		}
 		
-	//�� ��ȭ�� ��û
-		@RequestMapping("/detail.no")
+		@RequestMapping(value = "/detail",method = RequestMethod.GET)
 		public String detail(Model model, int id,@RequestParam(defaultValue="0") int read ) {
 			
 			if(read==1) {
@@ -85,15 +80,13 @@ public class NoticeController {
 			return "notice/detail";
 		}
 		
-	//�� ���� ȭ�� ��û
-		@RequestMapping("/modify.no")
+		@RequestMapping(value = "/update",method = RequestMethod.GET)
 		public String modify(int id,Model model) {
 			model.addAttribute("vo",service.detail(id));
 			return "notice/modify";
 		}
 		
-	//�� ���� ó�� ��û
-		@RequestMapping("/update.no")
+		@RequestMapping(value = "/update",method = RequestMethod.POST)
 		public String update(NoticeVO vo,MultipartFile file,HttpSession session,String attach) {
 
 			NoticeVO notice=service.detail(vo.getId());
@@ -120,8 +113,7 @@ public class NoticeController {
 			return "redirect:detail.no?id="+vo.getId();
 		}
 		
-	//�� ���� ó�� ��û
-		@RequestMapping("/delete.no")
+		@RequestMapping(value = "/delete",method = RequestMethod.DELETE)
 		public String delete(int id,HttpSession session) {
 		File f= new File(
 			session.getServletContext().getRealPath("resources"+service.detail(id).getFilepath()) );

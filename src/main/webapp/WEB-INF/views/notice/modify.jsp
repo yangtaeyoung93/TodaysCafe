@@ -9,7 +9,7 @@
 </head>
 <body>
 <br><h1>NOTICE</h1><br>
-<form action="update.no" method="post" enctype="multipart/form-data">
+<form action="update" method="post" enctype="multipart/form-data">
 <input type="hidden" name="id" value="${vo.id }">    
    <table>
        <tr>
@@ -40,7 +40,7 @@
 <div align="center">
       <input type="hidden" name="attach" id="attach"/>
       <a class="btn-fill" onclick="if(necessary()){$('form').submit()}">저장</a>
-      <a class="btn-empty" onclick="location='detail.no?id=${vo.id}'">취소</a>
+      <a class="btn-empty" onclick="location='detail?id=${vo.id}'">취소</a>
 </div>
 </form>
 </body>

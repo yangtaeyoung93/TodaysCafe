@@ -8,7 +8,7 @@
 <body>
 <br><h1>NOTICE</h1><br>
 <div style="display:inline; min-width: 100%;" align="center">
-<form method="post" action="list.no" id="list">
+<form method="get" action="list" id="list">
    <div style="display:inline; float:left; width: 75%;" align="right">
    <select name="search" style="height: 28px; width: 92px;">
             <option value="all" ${page.search eq 'all'?'selected':'' }>전체</option>
@@ -20,7 +20,7 @@
    </div>
    <div style="display:inline;float:left; width: 25%; text-align:left; ">
    <c:if test="${login_info.admin eq 'y'}">
- 	  <a onclick="location='new.no'">&nbsp;&nbsp;&nbsp;&nbsp;글쓰기</a>
+ 	  <a onclick="location='new'">&nbsp;&nbsp;&nbsp;&nbsp;글쓰기</a>
    </c:if>
    </div>
 <input type="hidden" name="curPage"/>
@@ -44,7 +44,7 @@
 <c:forEach items="${page.list}" var="vo">
    <tr><td align="center">${vo.no }</td>
          <td>
-            <a onclick="location='detail.no?id=${vo.id}&read=1'">${vo.title }</a>
+            <a onclick="location='detail?id=${vo.id}&read=1'">${vo.title }</a>
          </td>
          <td align="center">${vo.writedate}</td>
          <td align="center">${vo.readcnt }</td>

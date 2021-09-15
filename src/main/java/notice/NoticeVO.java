@@ -1,16 +1,14 @@
 package notice;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class NoticeVO {
    private int id,readcnt,no;
    private String title, content, writer, name;
-   //writer: 로그인한 사용자 :userid
-   //name: 로그인한 회원명
-   @JsonFormat(pattern="yyyy-MM-dd")
-   private Date writedate;
+
+   private LocalDate writedate;
    private String filename, filepath;
    private String nexttitle, pretitle;
    private int next_idx, pre_idx;
@@ -94,10 +92,10 @@ public class NoticeVO {
    public void setName(String name) {
       this.name = name;
    }
-   public Date getWritedate() {
+   public LocalDate getWritedate() {
       return writedate;
    }
-   public void setWritedate(Date writedate) {
+   public void setWritedate(LocalDate writedate) {
       this.writedate = writedate;
    }
 

@@ -6,18 +6,7 @@ public class MypageVO {
 
 	public MypageVO() {}
 	
-	public MypageVO(String userid, String userpwd, String email, String dbimgpath, String filename, String admin, String authstatus) {
-		super();
-		this.userid = userid;
-		this.userpwd = userpwd;
-		this.email = email;
-		this.dbimgpath = dbimgpath;
-		this.filename = filename;
-		this.admin = admin;
-		this.authstatus = authstatus;
-	}
 
-	
 	
 	public String getAuthstatus() {
 		return authstatus;

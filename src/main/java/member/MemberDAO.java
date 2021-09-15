@@ -27,21 +27,18 @@ public class MemberDAO implements MemberService {
 
    @Override
    public boolean update(MemberVO vo) {
-      // TODO Auto-generated method stub
       return false;
    }
 
    //회원 탈퇴
    @Override
    public boolean delete(String email) {
-      System.out.println("DAO========="+email);
       return sql.delete("member.mapper.userdelete",email)>0? true : false;
    }
 
  //3. 웹 로그인
  	@Override
  	public MemberVO weblogin(HashMap map) {
- 		System.out.println("MemberDAO Map " + map);
  		return sql.selectOne("member.mapper.weblogin", map);
  	}
  	
@@ -111,40 +108,34 @@ public class MemberDAO implements MemberService {
     //5. appResponse
   	@Override
   	public MemberVO androidResponse(String email) {
-  		// TODO Auto-generated method stub
   		return  sql.selectOne("member.mapper.androidResponse", email);
   	}
   	
   	@Override
 	public MemberVO selectMember(String email) {
-		// TODO Auto-generated method stub
 		return sql.selectOne("member.mapper.emailmatching", email);
 	}
 	
 	
 	@Override
 	public boolean insertNaver(HashMap map) {
-		// TODO Auto-generated method stub
 		return sql.insert("member.mapper.insertNaver", map) > 0 ? true : false;
 	}
 
 	
 	@Override
 	public boolean insertNaverweb(String email) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	
 	@Override
 	public MemberVO webResponse(String email) {
-		// TODO Auto-generated method stub
 		return sql.selectOne("member.mapper.webResponse", email);
 	}
 
 	@Override
 	public MemberVO insertNaverweb(HashMap map) {
-		// TODO Auto-generated method stub
 		return sql.selectOne("member.mapper.insertNaverweb", map);
 	}
    

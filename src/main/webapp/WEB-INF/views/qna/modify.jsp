@@ -37,7 +37,7 @@
 <div align="center">
 		<input type="hidden" name="attach" id="attach"/>
 		<a class="btn-fill" onclick="if(necessary()){$('form').submit()}">저장</a>
-		<a class="btn-empty" onclick="location='detail.qa?id=${vo.id}'">취소</a>
+		<a class="btn-empty" onclick="location='qna/detail?id=${vo.id}'">취소</a>
 </div>
 </form>
 </body>

@@ -22,10 +22,10 @@
 	<a class="btn-fill" onclick="$('#detail').submit()"><img id="list-back" title="목록으로" src="img/back-arrow.png" style="width:20px"></a>&nbsp;
 	
 	<c:if test="${login_info.userid eq vo.writer }">
-		<a class="btn-fill" onclick="location='modify.qa?id=${vo.id}'"><img title="수정" src="img/eraser.png" style="width:20px"></a>&nbsp;
-		<a class="btn-fill" onclick="if(confirm('정말 삭제하시겠습니까?')){location='delete.qa?id=${vo.id}'}"><img title="삭제" src="img/delete-button.png" style="width:20px"></a>&nbsp;
+		<a class="btn-fill" onclick="location='/qna/update?id=${vo.id}'"><img title="수정" src="img/eraser.png" style="width:20px"></a>&nbsp;
+		<a class="btn-fill" onclick="if(confirm('정말 삭제하시겠습니까?')){location='/qna/delete?id=${vo.id}'}"><img title="삭제" src="img/delete-button.png" style="width:20px"></a>&nbsp;
 	</c:if>
-	<a class="btn-fill" onclick="location='reply.qa?id=${vo.id}'"><img title="답글" src="img/re.png" style="width:20px"></a>
+	<a class="btn-fill" onclick="location='/qna/reply?id=${vo.id}'"><img title="답글" src="img/re.png" style="width:20px"></a>
 	</div>
 	</div>
 		<div style="display:inline; float:left; width:80%;">
@@ -48,7 +48,7 @@
 <tr><td colspan="6"><hr></td></tr>
 </table><br>
 <div>
-	<form id="detail" method="post" action="list.qa">
+	<form id="detail" method="get" action="list.qa">
 		<input type="hidden" name="curPage" value="${page.curPage }" /> <input
 			type="hidden" name="search" value="${page.search }" /> <input
 			type="hidden" name="keyword" value="${page.keyword }" />
