@@ -11,8 +11,7 @@
 <script type="text/javascript" src="js/map/map.js"/>
 <script type="text/javascript" src="js/map/storeInfo.js"/>
 <script type="text/javascript" src="js/map/markerclusterer.js"/>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsrerDHJrp9Wu09Ij7MUELxCTPiYfxfBI&callback=initMap" defer></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=g2ppo5suw4&callback=initMap" defer />
 </head>
 <body>
 	<img id="open" src="./img/left.png" width="50px" height="50px" />

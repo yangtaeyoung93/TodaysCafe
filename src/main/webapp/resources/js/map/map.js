@@ -12,45 +12,54 @@ var map;
 		}
 	};
 	// getLocation
-
+	var latitude, longitude;
 	function locationSuccess(position) {
-	    const latitude = position.coords.latitude;
-		const longitude = position.coords.longitude;
-		initMap(latitude,longitude);
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+		initMap(lat,lng);
 	}
 
 	function initMap(lat,lng) {
 
-		myLatLng = new google.maps.LatLng(lat, lat);
-		map = new google.maps.Map(document.getElementById('map'), {
+		myLatLng = new naver.maps.LatLng(lat,lng); // 지도에서 가운데로 위치할 위도와 경도
+		map = new naver.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15,
-			mapTypeId : google.maps.MapTypeId.ROADMAP
+			mapTypeId : naver.maps.MapTypeId.ROADMAP
 		});
 		var size_x = 24; // 마커로 사용할 이미지의 가로 크기
 		var size_y = 24; // 마커로 사용할 이미지의 세로 크기
 
 		// 마커로 사용할 이미지 주소
-		var image = new google.maps.MarkerImage('./img/coffee-icon.png',
-				new google.maps.Size(size_x, size_y), '', '',
-				new google.maps.Size(size_x, size_y));
+		var image = new naver.maps.MarkerImage('./img/coffee-icon.png',
+				new naver.maps.Size(size_x, size_y), '', '',
+				new naver.maps.Size(size_x, size_y));
 
+        var markerOptions = {
+            position: myLatLng,
+            map: map,
+            icon: {
+                url: './img/coffee-icon.png',
+                size: new naver.maps.Size(size_x, size_x),
+                origin: new naver.maps.Point(0, 0),
+                anchor: new naver.maps.Point(25, 26)
+            }
+        };
 		var marker;
 
-		marker = new google.maps.Marker({
+		marker = new naver.maps.Marker({
 			position : myLatLng, // 마커가 위치할 위도와 경도(변수)
 			map : map,
-
 			title : '내위치' // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
 		});
 		var content = "내위치!"; // 말풍선 안에 들어갈 내용
 
 		// 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
-		var infowindow = new google.maps.InfoWindow({
+		var infowindow = new naver.maps.InfoWindow({
 			content : content
 		});
 
-		google.maps.event.addListener(marker, "click", function() {
+		naver.maps.Event.addListener(marker, "click", function() {
 			infowindow.open(map, marker);
 			//클릭시 상세화면이동
 			alert('내위치');
@@ -64,7 +73,7 @@ var map;
 
 	function dataList() {
 		markers = [];
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new naver.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15
 		});
@@ -123,7 +132,7 @@ var map;
 													+ '<div id="option_parking"><img src="'+option_parking+'" width="42px" height="42px"/></div>'
 													+ '<div id="option_pet"><img src="'+option_pet+'" width="42px" height="42px"/></div>'
 													+ '</div></div><br>';
-											var marker = new google.maps.Marker(
+											var marker = new naver.maps.Marker(
 													{
 														position : myLatLng,
 														map : map
@@ -137,7 +146,6 @@ var map;
 											$('#list').html(tag);
 
 										});
-
 						var markerClusterer = new MarkerClusterer(map, markers,
 								{
 									maxZoom : 16,
@@ -163,12 +171,12 @@ var map;
 			$('#searchText').focus();
 			return;
 		}
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new naver.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15
 		});
 
-		var marker = new google.maps.Marker({
+		var marker = new naver.maps.Marker({
 			position : myLatLng,
 			map : map
 		});
@@ -288,12 +296,12 @@ var map;
 
 		markers = [];
 		$('#list').html('');
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new naver.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15
 		});
 
-		var marker = new google.maps.Marker({
+		var marker = new naver.maps.Marker({
 			position : myLatLng,
 			map : map
 		});
@@ -477,17 +485,18 @@ var map;
 	function smokingList() {
 		markers = [];
 		$('#list').html('');
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new naver.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15
 		});
 
-		var marker = new google.maps.Marker({
+		var marker = new naver.maps.Marker({
 			position : myLatLng,
 			map : map
 		});
 
-		$.ajax({
+		$
+				.ajax({
 					url : 'smokingList',
 					success : function(data) {
 
@@ -497,7 +506,8 @@ var map;
 						var option_pet = '';
 
 						var xy = '';
-						$.each(
+						$
+								.each(
 										data,
 										function(key, value) {
 											if (value.smoke == ('O')) {
@@ -566,12 +576,12 @@ var map;
 	function animalList() {
 		markers = [];
 		$('#list').html('');
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new naver.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15
 		});
 
-		var marker = new google.maps.Marker({
+		var marker = new naver.maps.Marker({
 			position : myLatLng,
 			map : map
 		});
@@ -656,12 +666,12 @@ var map;
 	function parkingList() {
 		markers = [];
 		$('#list').html('');
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new naver.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15
 		});
 
-		var marker = new google.maps.Marker({
+		var marker = new naver.maps.Marker({
 			position : myLatLng,
 			map : map
 		});
@@ -755,7 +765,7 @@ var map;
 		var xy = "'" + id1 + "', '" + storename + "','" + address + "','" + tel
 				+ "','" + lat + "','" + lng + "','" + close + "'";
 
-		var marker = new google.maps.Marker({
+		var marker = new naver.maps.Marker({
 			position : location,
 			map : map,
 			icon : './img/coffee-icon.png',
@@ -783,10 +793,10 @@ var map;
 			filepath = './img/cafe1.png';
 		}
 
-		var infowindow = new google.maps.InfoWindow({
+		var infowindow = new naver.maps.InfoWindow({
 			content : ""
 		});
-		google.maps.event
+		naver.maps.Event
 				.addListener(
 						marker,
 						"click",
@@ -819,11 +829,11 @@ var map;
 			lat : parseFloat(lat),
 			lng : parseFloat(lng)
 		};
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new naver.maps.Map(document.getElementById('map'), {
 			zoom : 15,
 			center : location
 		});
-		var marker = new google.maps.Marker({
+		var marker = new naver.maps.Marker({
 			position : location,
 			map : map,
 			title : name
@@ -854,10 +864,10 @@ var map;
 			filepath = './img/cafe1.png';
 		}
 
-		var infowindow = new google.maps.InfoWindow({
+		var infowindow = new naver.maps.InfoWindow({
 			content : ""
 		});
-		google.maps.event
+		naver.maps.Event
 				.addListener(
 						marker,
 						"click",
@@ -993,6 +1003,7 @@ var map;
 							.hide().appendTo('.tel');
 					$('<div>' + value.close + '<div>').addClass('store_close')
 							.hide().appendTo('.close');
+					//$('<ul><li><div><a><img src=".img/cafe7.png" width=30, height=30>')
 
 				});
 
