@@ -82,6 +82,23 @@ function go_logout() {
         }
      });
 }
+initData();
+function initData(){
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET','./data?lat='+lat+"&lng="+lng;
+      xhr.send();
+      xhr.onload = () => {
+        if(xhr.status == 200){
+            console.log(xhr.response);
+            console.log("성공");
+        }else{
+            console.log("실패");
+      }
+
+}
 </script>
 <div id="main-header" class="header" >
 	<div class="header__top">

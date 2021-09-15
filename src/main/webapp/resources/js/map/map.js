@@ -12,19 +12,16 @@ var map;
 		}
 	};
 	// getLocation
-	var latitude, longitude;
+
 	function locationSuccess(position) {
-		latitude = position.coords.latitude,
-				longitude = position.coords.longitude;
-		initMap();
+	    const latitude = position.coords.latitude;
+		const longitude = position.coords.longitude;
+		initMap(latitude,longitude);
 	}
 
-	function initMap() {
+	function initMap(lat,lng) {
 
-		var mapLocation = new google.maps.LatLng('35.1469', '126.9098'); // 지도에서 가운데로 위치할 위도와 경도
-		var markLocation = new google.maps.LatLng('35.1469', '126.9098'); // 마커가 위치할 위도와 경도
-
-		myLatLng = new google.maps.LatLng(latitude, longitude);
+		myLatLng = new google.maps.LatLng(lat, lat);
 		map = new google.maps.Map(document.getElementById('map'), {
 			center : myLatLng,
 			zoom : 15,
@@ -136,14 +133,6 @@ var map;
 													value.address, value.tel,
 													value.lat, value.lng,
 													value.close);
-											/*   marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');  */
-
-											/* var location = {lat : parseFloat(value.lat), lng : parseFloat(value.lng)};
-											      var marker = new google.maps.Marker({position: location, map: map, title: value.name});
-											     var infowindow = new google.maps.InfoWindow({ content: value.name});
-											    google.maps.event.addListener(marker, "click", function() {
-											       infowindow.open(map,marker);
-											       //클릭시 상세화면이동 */
 
 											$('#list').html(tag);
 
@@ -259,17 +248,6 @@ var map;
 											$('#option').css("display", "none");
 											$('.option_info').css("visibility",
 													"hidden")
-											/*               var location = {lat : parseFloat(value.lat), lng : parseFloat(value.lng)};
-											              var marker = new google.maps.Marker({position: myLatLng, map:map, title: '내위치'})
-											              marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-											                  marker = new google.maps.Marker({position: location, map: map, title: value.name});
-
-											                var infowindow = new google.maps.InfoWindow({ content: value.name});
-											                  google.maps.event.addListener(marker, "click", function() {
-											                   infowindow.open(map,marker);
-											                //클릭시 상세화면이동
-											                alert(value.name);
-											           });  */
 										});
 
 						var markerClusterer = new MarkerClusterer(map, markers,
@@ -509,8 +487,7 @@ var map;
 			map : map
 		});
 
-		$
-				.ajax({
+		$.ajax({
 					url : 'smokingList',
 					success : function(data) {
 
@@ -520,8 +497,7 @@ var map;
 						var option_pet = '';
 
 						var xy = '';
-						$
-								.each(
+						$.each(
 										data,
 										function(key, value) {
 											if (value.smoke == ('O')) {
@@ -1017,7 +993,6 @@ var map;
 							.hide().appendTo('.tel');
 					$('<div>' + value.close + '<div>').addClass('store_close')
 							.hide().appendTo('.close');
-					//$('<ul><li><div><a><img src=".img/cafe7.png" width=30, height=30>')
 
 				});
 

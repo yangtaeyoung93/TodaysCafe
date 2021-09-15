@@ -27,10 +27,11 @@ public class Datacontroller {
    @Autowired private CommonService common;
     // db에 api 정보 넣기
    @ResponseBody @RequestMapping(value = "/data", produces="application/text; charset=utf-8")
-   public void insertlist() {
-      StringBuilder url = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAebWzOcoc_IIZnEy7tWnxp584h3X3W9o8&location=35.147188,126.918715&radius=1000&type=cafe");
+   public void insertlist(String lat, String lng) {
+       String location = lat +","+ lng;
+      StringBuilder url = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAebWzOcoc_IIZnEy7tWnxp584h3X3W9o8&location="+location+"&radius=1000&type=cafe");
       
-      service.insertlist(url);
+      service.insertlist(url.toString());
    }
    
    // 앱 json으로 db정보 뿌리기
