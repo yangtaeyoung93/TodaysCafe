@@ -1,7 +1,7 @@
 package data;
 
-public class JsonDTO {
-   private String storename, address, tel, lat,lng ,close, smoke, parking, pet, seat;
+public class JsonDTO extends DataDTO{
+   private String  address, tel,close, smoke, parking, pet, seat;
    private int id;
 
    
@@ -71,36 +71,5 @@ public class JsonDTO {
    public void setId(int id) {
       this.id = id;
    }
-
-   public String getStorename() {
-      return storename;
-   }
-   public void setStorename(String storename) {
-      this.storename = storename;
-   }
-
-
-   public String getLat() {
-      return lat;
-   }
-
-
-
-   public void setLat(String lat) {
-      this.lat = lat;
-   }
-
-
-
-   public String getLng() {
-      return lng;
-   }
-
-
-
-   public void setLng(String lng) {
-      this.lng = lng;
-   }
-
 
 }

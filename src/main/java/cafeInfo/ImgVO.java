@@ -9,8 +9,6 @@ public class ImgVO {
    
    public ImgVO() {}
 
-
-
    public int getId() {
       return id;
    }

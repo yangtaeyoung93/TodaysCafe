@@ -25,12 +25,15 @@ public class Datacontroller {
    @Autowired   private DataServiceImpl service;
    @Autowired private MemberServiceImpl memberservice;
    @Autowired private CommonService common;
+   private final String URL = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=";
     // db에 api 정보 넣기
    @ResponseBody @RequestMapping(value = "/data", produces="application/text; charset=utf-8")
    public void insertlist(String lat, String lng) {
        String location = lat +","+ lng;
-      StringBuilder url = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAebWzOcoc_IIZnEy7tWnxp584h3X3W9o8&location="+location+"&radius=1000&type=cafe");
-      
+       //StringBuilder url = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAebWzOcoc_IIZnEy7tWnxp584h3X3W9o8&location="+location+"&radius=1000&type=cafe");
+       StringBuilder url = new StringBuilder();
+       url.append(URL+location);
+
       service.insertlist(url.toString());
    }
    

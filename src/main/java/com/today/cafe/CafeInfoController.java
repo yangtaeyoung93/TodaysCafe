@@ -4,7 +4,6 @@ import cafeInfo.CafeInfoServiceImpl;
 import com.google.gson.Gson;
 import common.CommonService;
 import cafeInfo.BookmarkVO;
-import data.DataServiceImpl;
 import cafeInfo.ReviewVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,7 +56,7 @@ public class CafeInfoController {
     @ResponseBody
     @RequestMapping("/andbookmarkList")
     public String andbookmarkList(int id, String userid) {
-        BookmarkVO vo = new BookmarkVO(userid,id);
+        BookmarkVO vo = new BookmarkVO(id,userid);
         int result =service.bookmarkList(vo);
         if(result==1) {
             String results = "true";
@@ -92,8 +91,8 @@ public class CafeInfoController {
     //웹 리뷰 삭제
     @ResponseBody
     @RequestMapping(value = "/delete-review",method = RequestMethod.DELETE)
-    public boolean reviewDelete(int reviewid) {
-        return service.reviewDelete(reviewid);
+    public boolean reviewDelete(int id) {
+        return service.reviewDelete(id);
     }
     //웹 리뷰 수정
     @ResponseBody
