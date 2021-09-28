@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.regex.Matcher;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +26,7 @@ import com.google.gson.Gson;
 
 import member.MemberServiceImpl;
 import member.MemberVO;
-import member.NaverLoginBO;
+import member.NaverLoginVO;
 
 @Controller
 @RequestMapping("/mobile")
@@ -284,12 +283,12 @@ public class AppMemberController {
       
    // 4. 웹 네이버 로그인
   	/* NaverLoginBO */
-  	private NaverLoginBO naverLoginBO;
+  	private NaverLoginVO naverLoginVO;
   	private String apiResult = null;
 
   	@Autowired
-  	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-  		this.naverLoginBO = naverLoginBO;
+  	private void setNaverLoginBO(NaverLoginVO naverLoginVO) {
+  		this.naverLoginVO = naverLoginVO;
   	}
   	
   	//웹로그아웃
@@ -306,7 +305,7 @@ public class AppMemberController {
   	@RequestMapping(value = "/weblogin", method = { RequestMethod.GET, RequestMethod.POST })
   	public String login(Model model, HttpSession session) {
   		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
-  		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+  		String naverAuthUrl = naverLoginVO.getAuthorizationUrl(session);
   		// 네이버
   		model.addAttribute("url", naverAuthUrl);
   		return "member/login";
@@ -318,10 +317,10 @@ public class AppMemberController {
   			HttpSession session) throws IOException, ParseException {
 
   		OAuth2AccessToken oauthToken;
-  		oauthToken = naverLoginBO.getAccessToken(session, code, state);
+  		oauthToken = naverLoginVO.getAccessToken(session, code, state);
 
   		// 1. 로그인 사용자 정보를 읽어온다.
-  		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
+  		apiResult = naverLoginVO.getUserProfile(oauthToken); // String형식의 json데이터
   		/**
   		 * apiResult json 구조 {"resultcode":"00", "message":"success",
   		 * "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"shinn0608@naver.com","name":"\uc2e0\ubc94\ud638"}}

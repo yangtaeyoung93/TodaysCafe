@@ -20,30 +20,18 @@ public class MemberVO implements Serializable{
    }
 
 
-
-
-
-
-
-
-
    public String getUserid() {
 	return userid;
 }
 
-
-
-public void setUserid(String userid) {
+   public void setUserid(String userid) {
 	this.userid = userid;
 }
 
-
-
-public int getAuthstatus() {
+   public int getAuthstatus() {
       return authstatus;
    }
-   
-   
+
    public void setAuthstatus(int authstatus) {
       this.authstatus = authstatus;
    }

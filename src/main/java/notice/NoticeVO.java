@@ -10,34 +10,7 @@ public class NoticeVO {
 
    private LocalDate writedate;
    private String filename, filepath;
-   private String nexttitle, pretitle;
-   private int next_idx, pre_idx;
-   
-   
-   public String getNexttitle() {
-      return nexttitle;
-   }
-   public void setNexttitle(String nexttitle) {
-      this.nexttitle = nexttitle;
-   }
-   public String getPretitle() {
-      return pretitle;
-   }
-   public void setPretitle(String pretitle) {
-      this.pretitle = pretitle;
-   }
-   public int getNext_idx() {
-      return next_idx;
-   }
-   public void setNext_idx(int next_idx) {
-      this.next_idx = next_idx;
-   }
-   public int getPre_idx() {
-      return pre_idx;
-   }
-   public void setPre_idx(int pre_idx) {
-      this.pre_idx = pre_idx;
-   }
+
    public String getFilename() {
       return filename;
    }

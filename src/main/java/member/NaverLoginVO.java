@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.UUID;
 
-public class NaverLoginBO {
+public class NaverLoginVO {
 
     /* 인증 요청문을 구성하는 파라미터 */
     //client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디
@@ -22,7 +22,6 @@ public class NaverLoginBO {
     private final static String CLIENT_ID = "x7LzG9eevU5LOjKBPrAS";       //네이버API Client ID
     private final static String CLIENT_SECRET = "1M7pxyK5ac";                      
     private final static String REDIRECT_URI = "http://localhost:80/cafe/callback";
-    	/*"http://localhost:80/users/callback.do"*/
     private final static String SESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";/// Api 종류 기본 !!

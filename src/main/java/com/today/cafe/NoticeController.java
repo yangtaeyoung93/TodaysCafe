@@ -31,7 +31,7 @@ public class NoticeController {
 	@Autowired NoticePage page;
 	
 	@ResponseBody
-	@RequestMapping("/nonono") 
+	@RequestMapping("/notice")
 	public Map<String, List<NoticeVO>> apapap(HttpServletRequest httpServletRequest) {
 		List<NoticeVO> NoticeVO = service.nolist();
 

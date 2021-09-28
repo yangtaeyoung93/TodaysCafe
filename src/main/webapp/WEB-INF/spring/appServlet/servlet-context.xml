@@ -46,7 +46,7 @@
 	<context:component-scan base-package="com.today.cafe" />
 	
 	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean id="naverLoginBO" class="member.NaverLoginBO"/>
+	<beans:bean id="naverLoginVO" class="member.NaverLoginVO"/>
 	
 		
 	
